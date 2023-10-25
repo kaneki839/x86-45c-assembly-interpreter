@@ -1,0 +1,25 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "Build Tests (ICS 45C)",
+            "command": "./build",
+            "args": [
+                "tests"
+            ],
+            "problemMatcher": [],
+            "detail": "Build tests for the ICS 45C class"
+        },
+        {
+            "type": "shell",
+            "label": "Build App (ICS 45C)",
+            "command": "./build",
+            "args": [
+                "app"
+            ],
+            "problemMatcher": [],
+            "detail": "Build the main.cpp app"
+        }
+    ]
+}

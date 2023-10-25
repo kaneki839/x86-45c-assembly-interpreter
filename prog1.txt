@@ -1,0 +1,3 @@
+MOV eax 15
+MOV ebx 20
+END

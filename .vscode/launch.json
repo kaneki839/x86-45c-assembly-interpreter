@@ -1,0 +1,39 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Run/Debug Tests (ICS 45C)",
+            "type": "cppdbg",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "program": "${workspaceFolder}/out/bin/a.out.tests",
+            "args": [],
+            "environment": [],
+            "setupCommands": [
+                {
+                    "text": "-enable-pretty-printing",
+                    "description": "enable pretty printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "Build Tests (ICS 45C)"
+        },
+        {
+            "name": "Run/Debug App (ICS 45C)",
+            "type": "cppdbg",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "program": "${workspaceFolder}/out/bin/a.out.app",
+            "args": [],
+            "environment": [],
+            "setupCommands": [
+                {
+                    "text": "-enable-pretty-printing",
+                    "description": "enable pretty printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "Build App (ICS 45C)"
+        }
+    ]
+}
