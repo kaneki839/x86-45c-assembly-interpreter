@@ -16,14 +16,14 @@
 #include "EndInstruction.hpp"
 
 // Simulates the given program.  The starting program state
-// will be provided to you via the second parameter. 
+// will be provided to you via the second parameter.
 // It is expected that you use this one, not a newly declared
 // one, in running your program.
-void runSimulator(std::istream &in, ProgramState * ps)
+void runSimulator(std::istream &in, ProgramState *ps)
 {
     // You will want to modify some of this.
     // You do not need to be very well versed in how std::stringstream works
-    // You should be able to figure out how it works based on 
+    // You should be able to figure out how it works based on
     // your knowledge of aspects like std::cin and reading the existing
     // code.  That is a skill worth developing!
 
@@ -31,22 +31,24 @@ void runSimulator(std::istream &in, ProgramState * ps)
     std::string token1, token2;
     std::stringstream ss;
 
-
-
-    while(  getline(in, line) )
+    // reading program
+    while (getline(in, line))
     {
         ss.clear();
         ss << line;
-        while( ss >> word )
+        while (ss >> word)
         {
-            if( "MOV" == word )
+            if ("MOV" == word)
             {
                 ss >> token1 >> token2;
+                MoveInstruction moveCommand = MoveInstruction{token1, token2};
+                // moveCommand.execute(line);
+                // token1 -> destination
+                // token2 -> src (const or register)
+                // create Moveins()
             }
         }
     }
 
-
+    // run the program
 }
-
-

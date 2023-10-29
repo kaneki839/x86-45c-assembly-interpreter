@@ -8,10 +8,12 @@
 class MoveInstruction : public Statement
 {
 public:
-	MoveInstruction(const std::string & dest, const std::string & src);
-	void execute(ProgramState * state) const override;
+	MoveInstruction(const std::string &dest, const std::string &src);
+	void execute(ProgramState *state) const override;
 
+private:
+	const std::string &dest;
+	const std::string &src;
 };
-
 
 #endif
