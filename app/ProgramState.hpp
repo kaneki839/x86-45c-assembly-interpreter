@@ -22,6 +22,7 @@ public:
 	// eax is 0, ebx is 1, etc.
 
 	int getRegister(size_t registerNum) const;
+	void setRegister(size_t registerNum, int value);
 
 	// If you want to add additional public member functions, you may do so here.
 	// The above functions must remain with their given interface:

@@ -3,7 +3,7 @@
 #include "ProgramState.hpp"
 
 ProgramState::ProgramState()
-	: registers{16, 0}, running{true}, programCounter{1}
+	: registers(16, 0), running{true}, programCounter{1}
 {
 }
 
@@ -29,4 +29,9 @@ bool ProgramState::done() const
 int ProgramState::getRegister(size_t registerNum) const
 {
 	return registers[registerNum];
+}
+
+void ProgramState::setRegister(size_t registerNum, int value)
+{
+	registers[registerNum] = value;
 }

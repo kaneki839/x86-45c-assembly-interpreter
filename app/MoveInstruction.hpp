@@ -12,8 +12,8 @@ public:
 	void execute(ProgramState *state) const override;
 
 private:
-	const std::string &dest;
-	const std::string &src;
+	const std::string &movDest;
+	const std::string &movSrc;
 };
 
 #endif

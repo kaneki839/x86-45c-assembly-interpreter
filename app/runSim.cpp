@@ -31,6 +31,9 @@ void runSimulator(std::istream &in, ProgramState *ps)
     std::string token1, token2;
     std::stringstream ss;
 
+    int programCounter = ps->getCounter();
+    std::vector<Statement *> statements;
+
     // reading program
     while (getline(in, line))
     {
@@ -41,13 +44,15 @@ void runSimulator(std::istream &in, ProgramState *ps)
             if ("MOV" == word)
             {
                 ss >> token1 >> token2;
-                MoveInstruction moveCommand = MoveInstruction{token1, token2};
-                // moveCommand.execute(line);
+                Statement *moveCommand = new MoveInstruction{token1, token2};
+                statements.push_back(moveCommand);
+                moveCommand->execute(ps);
+
                 // token1 -> destination
                 // token2 -> src (const or register)
-                // create Moveins()
             }
         }
+        programCounter++;
     }
 
     // run the program

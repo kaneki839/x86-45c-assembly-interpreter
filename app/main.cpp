@@ -7,8 +7,9 @@ int main()
 {
     std::ifstream in{"prog1.txt"};
     ProgramState ps;
-    std::cout << ps.getRegister(3) << std::endl;
     runSimulator(in, &ps);
+    std::cout << ps.getRegister(0) << std::endl;
+    std::cout << ps.getRegister(1) << std::endl;
 
     return 0;
 }
