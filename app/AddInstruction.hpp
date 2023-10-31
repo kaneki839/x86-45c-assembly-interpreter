@@ -11,7 +11,9 @@ public:
 	AddInstruction(const std::string & dest, const std::string & src);
 	void execute(ProgramState * state) const override;
 
+private:
+	const std::string addDest;
+	const std::string addSrc;
 };
-
 
 #endif

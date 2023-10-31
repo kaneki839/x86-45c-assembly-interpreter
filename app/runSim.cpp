@@ -45,9 +45,12 @@ void runSimulator(std::istream &in, ProgramState *ps)
                 ss >> token1 >> token2;
                 Statement *moveCommand = new MoveInstruction(token1, token2);
                 statements.push_back(moveCommand);
-
-                // token1 -> destination
-                // token2 -> src (const or register)
+            }
+            
+            else if ("ADD" == word) {
+                ss >> token1 >> token2;
+                Statement *addCommand = new AddInstruction(token2, token1);
+                statements.push_back(addCommand);
             }
         }
     }
@@ -56,7 +59,7 @@ void runSimulator(std::istream &in, ProgramState *ps)
 
     size_t commandNum = 0;
 
-    while (commandNum < statement.size()) {
+    while (commandNum < statements.size()) {
         statements[commandNum]->execute(ps);
         commandNum++;
     }
