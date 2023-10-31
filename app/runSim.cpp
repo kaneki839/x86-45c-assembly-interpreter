@@ -94,8 +94,15 @@ void runSimulator(std::istream &in, ProgramState *ps)
             else if ("JL" == word)
             {
                 ss >> token1 >> token2;
-                Statement *jmplessCommand = new JLInstruction(token1);
-                statements.push_back(jmplessCommand);
+                Statement *jmpLessCommand = new JLInstruction(token1);
+                statements.push_back(jmpLessCommand);
+            }
+
+            else if ("JE" == word)
+            {
+                ss >> token1 >> token2;
+                Statement *jmpEqCommand = new JEInstruction(token1);
+                statements.push_back(jmpEqCommand);
             }
             
             else if ("END" == word)
@@ -114,7 +121,8 @@ void runSimulator(std::istream &in, ProgramState *ps)
         int pc = ps->getCounter() - 1;
         EndInstruction *endInsPtr = dynamic_cast<EndInstruction *>(statements[pc]);
         JmpInstruction *jmpInsPtr = dynamic_cast<JmpInstruction *>(statements[pc]);
-        JLInstruction *jmplessInsPtr = dynamic_cast<JLInstruction *>(statements[pc]);
+        JLInstruction *jmpLessInsPtr = dynamic_cast<JLInstruction *>(statements[pc]);
+        JEInstruction *jmpEqInsPtr = dynamic_cast<JEInstruction *>(statements[pc]);
 
         if (endInsPtr)
         {
@@ -124,7 +132,8 @@ void runSimulator(std::istream &in, ProgramState *ps)
         {
             statements[pc]->execute(ps);
         }
-        else if (jmplessInsPtr)
+        
+        else if (jmpLessInsPtr)
         {
             if (ps->getCmp() == '<')
             {
@@ -135,6 +144,19 @@ void runSimulator(std::istream &in, ProgramState *ps)
                 ps->increCounter();
             }
         }
+
+        else if (jmpEqInsPtr)
+        {
+            if (ps->getCmp() == '=')
+            {
+                statements[pc]->execute(ps);
+            }
+            else
+            {
+                ps->increCounter();
+            }
+        }
+
         else
         {
             statements[pc]->execute(ps);

@@ -1,0 +1,12 @@
+ADD 1 eax
+IMUL 10 eax
+ADD 10 ebx
+CMP eax ebx
+JE 8
+INC eax
+END
+INC ebx
+CMP eax ebx
+JE 12
+INC ebx
+END

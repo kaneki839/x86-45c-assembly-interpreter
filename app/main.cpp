@@ -5,7 +5,7 @@
 
 int main()
 {
-    std::ifstream in{"test1.txt"};
+    std::ifstream in{"test2.txt"};
     ProgramState ps;
     runSimulator(in, &ps);
     std::cout << ps.getRegister(0) << std::endl;

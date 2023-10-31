@@ -163,4 +163,14 @@ namespace
                 REQUIRE(ps.getCounter() == 9);
         }
 
+        TEST_CASE("TestingEqConditionalJUmp", "[RequiredFullPrograms]")
+        {
+                std::ifstream in{"test2.txt"};
+                ProgramState ps;
+                runSimulator(in, &ps);
+                REQUIRE(ps.getRegister(0) == 10);
+                REQUIRE(ps.getRegister(1) == 12);
+                REQUIRE(ps.getCounter() == 12);
+        }
+
 } // end namespace
