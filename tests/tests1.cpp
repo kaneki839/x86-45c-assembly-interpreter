@@ -9,6 +9,8 @@
 #include "JLInstruction.hpp"
 #include "JEInstruction.hpp"
 #include "EndInstruction.hpp"
+#include "IncInstruction.hpp"
+#include "ImulInstruction.hpp"
 #include "runSim.hpp"
 #include <fstream>
 #include <string>
@@ -181,6 +183,82 @@ namespace
                 REQUIRE(ps.getRegister(0) == 15);
                 REQUIRE(ps.getRegister(1) == 7);
                 REQUIRE(ps.getCounter() == 15);
+        }
+
+        TEST_CASE("Multiplication", "[Extra]")
+        {
+                ProgramState ps;
+
+                ps.setRegister(0, 1);
+                ImulInstruction m1{"eax", "15"};
+                m1.execute(&ps);
+                REQUIRE(ps.getRegister(0) == 15);
+
+                ps.setRegister(1, 2);
+                ImulInstruction m2{"ebx", "10"};
+                m2.execute(&ps);
+                REQUIRE(ps.getRegister(1) == 20);
+
+                ImulInstruction si1{"eax", "ebx"};
+                si1.execute(&ps);
+                REQUIRE(ps.getRegister(0) == 300);
+        }
+
+        TEST_CASE("Increment", "[Extra]")
+        {
+                ProgramState ps;
+
+                ps.setRegister(0, 1);
+                IncInstruction m1{"eax"};
+                m1.execute(&ps);
+                REQUIRE(ps.getRegister(0) == 2);
+
+                ps.setRegister(1, 2);
+                IncInstruction m2{"ebx"};
+                m2.execute(&ps);
+                REQUIRE(ps.getRegister(1) == 3);
+        }
+
+        TEST_CASE("JumpWhenLessThan", "[Extra]")
+        {
+                ProgramState ps;
+
+                CmpInstruction cm1{"10", "5"}; // greater than -- not jump
+                cm1.execute(&ps);
+                JLInstruction js1{"5"};
+                js1.execute(&ps);
+
+                CmpInstruction cm2{"5", "10"}; // less than -- jump
+                cm2.execute(&ps);
+                JLInstruction js2{"5"};
+                js2.execute(&ps);
+                REQUIRE(ps.getCounter() == 5);
+
+                CmpInstruction cm3{"10", "10"}; // equal to -- not jump
+                cm3.execute(&ps);
+                JLInstruction js3{"3"};
+                js3.execute(&ps);
+        }
+
+        TEST_CASE("JumpWhenEqualTo", "[Extra]")
+        {
+                ProgramState ps;
+
+                CmpInstruction cm1{"10", "5"}; // greater than -- not jump
+                cm1.execute(&ps);
+                JEInstruction js1{"5"};
+                js1.execute(&ps);
+
+                CmpInstruction cm2{"10", "10"}; // equal to -- jump
+                cm2.execute(&ps);
+                JEInstruction js2{"5"};
+                js2.execute(&ps);
+                REQUIRE(ps.getCounter() == 5);
+
+                CmpInstruction cm3{"5", "10"}; // less than -- not jump
+                cm3.execute(&ps);
+                JEInstruction js3{"3"};
+                js3.execute(&ps);
         }
 
 } // end namespace

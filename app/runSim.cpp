@@ -104,7 +104,7 @@ void runSimulator(std::istream &in, ProgramState *ps)
                 Statement *jmpEqCommand = new JEInstruction(token1);
                 statements.push_back(jmpEqCommand);
             }
-            
+
             else if ("END" == word)
             {
                 Statement *endCommand = new EndInstruction();
@@ -116,7 +116,7 @@ void runSimulator(std::istream &in, ProgramState *ps)
     // run the program
     bool running = true;
 
-    while (running)
+    while (running && ps->getCounter() <= statements.size())
     {
         int pc = ps->getCounter() - 1;
         EndInstruction *endInsPtr = dynamic_cast<EndInstruction *>(statements[pc]);
