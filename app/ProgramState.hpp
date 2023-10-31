@@ -11,7 +11,8 @@ public:
 	~ProgramState();
 
 	size_t getCounter() const;
-	void setCounter();
+	void setCounter(int value);
+	void increCounter();
 
 	// terminate means quit when something bad happened (e.g., trying to access a non-existent register)
 	void terminate();

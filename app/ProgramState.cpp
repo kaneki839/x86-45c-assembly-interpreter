@@ -4,7 +4,7 @@
 #include <string>
 
 ProgramState::ProgramState()
-	: registers{std::vector<int>(16, 0)}, programCounter{0}, cmpResult{}
+	: registers{std::vector<int>(16, 0)}, programCounter{1}, cmpResult{}
 {
 }
 
@@ -17,7 +17,12 @@ size_t ProgramState::getCounter() const
 	return programCounter;
 }
 
-void ProgramState::setCounter()
+void ProgramState::setCounter(int value)
+{
+	programCounter = value;
+}
+
+void ProgramState::increCounter()
 {
 	programCounter++;
 }

@@ -84,6 +84,13 @@ void runSimulator(std::istream &in, ProgramState *ps)
                 statements.push_back(cmpCommand);
             }
 
+            else if ("JMP" == word)
+            {
+                ss >> token1 >> token2;
+                Statement *jmpCommand = new JmpInstruction(token1);
+                statements.push_back(jmpCommand);
+            }
+
             else if ("END" == word)
             {
                 Statement *endCommand = new EndInstruction();
@@ -94,24 +101,26 @@ void runSimulator(std::istream &in, ProgramState *ps)
 
     // run the program
     bool running = true;
-    int commandNum = 0;
 
     while (running)
     {
-        EndInstruction *endInsPtr = dynamic_cast<EndInstruction *>(statements[commandNum]);
+        int pc = ps->getCounter() - 1;
+        EndInstruction *endInsPtr = dynamic_cast<EndInstruction *>(statements[pc]);
+        JmpInstruction *jmpInsPtr = dynamic_cast<JmpInstruction *>(statements[pc]);
         if (endInsPtr)
         {
             running = ps->done();
-            commandNum++;
         }
-
+        else if (jmpInsPtr)
+        {
+            statements[pc]->execute(ps);
+        }
         else
         {
-            statements[commandNum]->execute(ps);
-            commandNum++;
+            statements[pc]->execute(ps);
+            ps->increCounter();
         }
-        ps->setCounter();
+        // std::cout << pc + 1 << std::endl;
     }
     // std::cout << commandNum << std::endl;
-    std::cout << ps->getCmp() << std::endl;
 }
