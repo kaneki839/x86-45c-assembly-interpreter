@@ -29,9 +29,13 @@ public:
 	// The above functions must remain with their given interface:
 	//	the grading script expects it.
 
+	void setCmp(char cmpVal);
+	char getCmp() const;
+
 private:
 	std::vector<int> registers;
 	int programCounter;
+	char cmpResult;
 
 	// If you want to add private member variables, you may do so here.
 };

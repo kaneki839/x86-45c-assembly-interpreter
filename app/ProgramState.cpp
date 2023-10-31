@@ -1,9 +1,10 @@
 #include <vector>
 #include <stdlib.h>
 #include "ProgramState.hpp"
+#include <string>
 
 ProgramState::ProgramState()
-	: registers{std::vector<int>(16, 0)}, programCounter{1}
+	: registers{std::vector<int>(16, 0)}, programCounter{0}, cmpResult{}
 {
 }
 
@@ -39,4 +40,14 @@ int ProgramState::getRegister(size_t registerNum) const
 void ProgramState::setRegister(size_t registerNum, int value)
 {
 	registers[registerNum] = value;
+}
+
+void ProgramState::setCmp(char cmpVal)
+{
+	cmpResult = cmpVal;
+}
+
+char ProgramState::getCmp() const
+{
+	return cmpResult;
 }

@@ -76,6 +76,14 @@ void runSimulator(std::istream &in, ProgramState *ps)
                 Statement *incCommand = new IncInstruction(token1);
                 statements.push_back(incCommand);
             }
+
+            else if ("CMP" == word)
+            {
+                ss >> token1 >> token2;
+                Statement *cmpCommand = new CmpInstruction(token1, token2);
+                statements.push_back(cmpCommand);
+            }
+
             else if ("END" == word)
             {
                 Statement *endCommand = new EndInstruction();
@@ -94,6 +102,7 @@ void runSimulator(std::istream &in, ProgramState *ps)
         if (endInsPtr)
         {
             running = ps->done();
+            commandNum++;
         }
 
         else
@@ -103,4 +112,6 @@ void runSimulator(std::istream &in, ProgramState *ps)
         }
         ps->setCounter();
     }
+    // std::cout << commandNum << std::endl;
+    std::cout << ps->getCmp() << std::endl;
 }
