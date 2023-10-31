@@ -10,6 +10,7 @@
 #include "AddInstruction.hpp"
 #include "SubtractionInstruction.hpp"
 #include "ImulInstruction.hpp"
+#include "IncInstruction.hpp"
 #include "CmpInstruction.hpp"
 #include "JmpInstruction.hpp"
 #include "JLInstruction.hpp"
@@ -68,11 +69,18 @@ void runSimulator(std::istream &in, ProgramState *ps)
                 Statement *multCommand = new ImulInstruction(token2, token1);
                 statements.push_back(multCommand);
             }
+
+            else if ("INC" == word)
+            {
+                ss >> token1;
+                Statement *incCommand = new IncInstruction(token1);
+                statements.push_back(incCommand);
+            }
         }
     }
 
     // run the program
-
+    // bool running = ps->done();
     size_t commandNum = 0;
 
     while (commandNum < statements.size())

@@ -8,10 +8,11 @@
 class IncInstruction : public Statement
 {
 public:
-	IncInstruction(const std::string & reg);
-	void execute(ProgramState * state) const override;
+	IncInstruction(const std::string &reg);
+	void execute(ProgramState *state) const override;
 
+private:
+	const std::string incReg;
 };
-
 
 #endif

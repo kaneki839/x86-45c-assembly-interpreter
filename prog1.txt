@@ -2,4 +2,6 @@ ADD 1 eax
 IMUL 15 eax
 ADD 10 ebx
 IMUL eax ebx
+INC eax
+INC ebx
 END
