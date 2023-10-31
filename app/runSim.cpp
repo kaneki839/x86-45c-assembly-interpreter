@@ -91,6 +91,13 @@ void runSimulator(std::istream &in, ProgramState *ps)
                 statements.push_back(jmpCommand);
             }
 
+            else if ("JL" == word)
+            {
+                ss >> token1 >> token2;
+                Statement *jmplessCommand = new JLInstruction(token1);
+                statements.push_back(jmplessCommand);
+            }
+            
             else if ("END" == word)
             {
                 Statement *endCommand = new EndInstruction();
@@ -107,6 +114,8 @@ void runSimulator(std::istream &in, ProgramState *ps)
         int pc = ps->getCounter() - 1;
         EndInstruction *endInsPtr = dynamic_cast<EndInstruction *>(statements[pc]);
         JmpInstruction *jmpInsPtr = dynamic_cast<JmpInstruction *>(statements[pc]);
+        JLInstruction *jmplessInsPtr = dynamic_cast<JLInstruction *>(statements[pc]);
+
         if (endInsPtr)
         {
             running = ps->done();
@@ -115,6 +124,17 @@ void runSimulator(std::istream &in, ProgramState *ps)
         {
             statements[pc]->execute(ps);
         }
+        else if (jmplessInsPtr)
+        {
+            if (ps->getCmp() == '<')
+            {
+                statements[pc]->execute(ps);
+            }
+            else
+            {
+                ps->increCounter();
+            }
+        }
         else
         {
             statements[pc]->execute(ps);
@@ -122,5 +142,6 @@ void runSimulator(std::istream &in, ProgramState *ps)
         }
         // std::cout << pc + 1 << std::endl;
     }
-    // std::cout << commandNum << std::endl;
+
+    // execute memory management
 }

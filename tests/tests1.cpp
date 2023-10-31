@@ -143,7 +143,7 @@ namespace
                 REQUIRE(ps.getRegister(1) == 15);
         }
 
-        TEST_CASE("TestingUnconditionalJUmp", "[RequiredFullPrograms]")
+        TEST_CASE("TestingUnconditionalJump", "[RequiredFullPrograms]")
         {
                 std::ifstream in{"test.txt"};
                 ProgramState ps;
@@ -151,6 +151,16 @@ namespace
                 REQUIRE(ps.getRegister(0) == 16);
                 REQUIRE(ps.getRegister(1) == 10);
                 REQUIRE(ps.getCounter() == 6);
+        }
+
+        TEST_CASE("TestingLessThanConditionalJUmp", "[RequiredFullPrograms]")
+        {
+                std::ifstream in{"test1.txt"};
+                ProgramState ps;
+                runSimulator(in, &ps);
+                REQUIRE(ps.getRegister(0) == 15);
+                REQUIRE(ps.getRegister(1) == 11);
+                REQUIRE(ps.getCounter() == 9);
         }
 
 } // end namespace
