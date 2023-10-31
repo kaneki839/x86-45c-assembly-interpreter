@@ -9,6 +9,7 @@
 #include "MoveInstruction.hpp"
 #include "AddInstruction.hpp"
 #include "SubtractionInstruction.hpp"
+#include "ImulInstruction.hpp"
 #include "CmpInstruction.hpp"
 #include "JmpInstruction.hpp"
 #include "JLInstruction.hpp"
@@ -59,6 +60,13 @@ void runSimulator(std::istream &in, ProgramState *ps)
                 ss >> token1 >> token2;
                 Statement *subCommand = new SubtractionInstruction(token2, token1);
                 statements.push_back(subCommand);
+            }
+
+            else if ("IMUL" == word)
+            {
+                ss >> token1 >> token2;
+                Statement *multCommand = new ImulInstruction(token2, token1);
+                statements.push_back(multCommand);
             }
         }
     }

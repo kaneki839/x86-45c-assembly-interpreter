@@ -11,6 +11,9 @@ public:
 	ImulInstruction(const std::string & dest, const std::string & src);
 	void execute(ProgramState * state) const override;
 
+private:
+	const std::string multDest;
+	const std::string multSrc;
 };
 
 
