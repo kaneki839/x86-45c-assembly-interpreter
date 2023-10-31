@@ -132,7 +132,7 @@ void runSimulator(std::istream &in, ProgramState *ps)
         {
             statements[pc]->execute(ps);
         }
-        
+
         else if (jmpLessInsPtr)
         {
             if (ps->getCmp() == '<')
@@ -162,8 +162,11 @@ void runSimulator(std::istream &in, ProgramState *ps)
             statements[pc]->execute(ps);
             ps->increCounter();
         }
-        // std::cout << pc + 1 << std::endl;
     }
 
-    // execute memory management
+    // free the memory
+    for (size_t i = 0; i < statements.size(); i++)
+    {
+        delete statements[i];
+    }
 }
