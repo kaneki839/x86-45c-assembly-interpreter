@@ -11,6 +11,7 @@ public:
 	~ProgramState();
 
 	size_t getCounter() const;
+	void setCounter();
 
 	// terminate means quit when something bad happened (e.g., trying to access a non-existent register)
 	void terminate();
@@ -30,7 +31,6 @@ public:
 
 private:
 	std::vector<int> registers;
-	bool running;
 	int programCounter;
 
 	// If you want to add private member variables, you may do so here.

@@ -76,16 +76,31 @@ void runSimulator(std::istream &in, ProgramState *ps)
                 Statement *incCommand = new IncInstruction(token1);
                 statements.push_back(incCommand);
             }
+            else if ("END" == word)
+            {
+                Statement *endCommand = new EndInstruction();
+                statements.push_back(endCommand);
+            }
         }
     }
 
     // run the program
-    // bool running = ps->done();
-    size_t commandNum = 0;
+    bool running = true;
+    int commandNum = 0;
 
-    while (commandNum < statements.size())
+    while (running)
     {
-        statements[commandNum]->execute(ps);
-        commandNum++;
+        EndInstruction *endInsPtr = dynamic_cast<EndInstruction *>(statements[commandNum]);
+        if (endInsPtr)
+        {
+            running = ps->done();
+        }
+
+        else
+        {
+            statements[commandNum]->execute(ps);
+            commandNum++;
+        }
+        ps->setCounter();
     }
 }

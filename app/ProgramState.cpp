@@ -3,7 +3,7 @@
 #include "ProgramState.hpp"
 
 ProgramState::ProgramState()
-	: registers{std::vector<int>(16,0)}, running{true}, programCounter{1}
+	: registers{std::vector<int>(16, 0)}, programCounter{1}
 {
 }
 
@@ -14,6 +14,11 @@ ProgramState::~ProgramState()
 size_t ProgramState::getCounter() const
 {
 	return programCounter;
+}
+
+void ProgramState::setCounter()
+{
+	programCounter++;
 }
 
 void ProgramState::terminate()
