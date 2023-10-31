@@ -31,7 +31,6 @@ void runSimulator(std::istream &in, ProgramState *ps)
     std::string token1, token2;
     std::stringstream ss;
 
-    int programCounter = ps->getCounter();
     std::vector<Statement *> statements;
 
     // reading program
@@ -44,16 +43,21 @@ void runSimulator(std::istream &in, ProgramState *ps)
             if ("MOV" == word)
             {
                 ss >> token1 >> token2;
-                Statement *moveCommand = new MoveInstruction{token1, token2};
+                Statement *moveCommand = new MoveInstruction(token1, token2);
                 statements.push_back(moveCommand);
-                moveCommand->execute(ps);
 
                 // token1 -> destination
                 // token2 -> src (const or register)
             }
         }
-        programCounter++;
     }
 
     // run the program
+
+    size_t commandNum = 0;
+
+    while (commandNum < statement.size()) {
+        statements[commandNum]->execute(ps);
+        commandNum++;
+    }
 }

@@ -3,7 +3,7 @@
 #include "ProgramState.hpp"
 
 ProgramState::ProgramState()
-	: registers(16, 0), running{true}, programCounter{1}
+	: registers{std::vector<int>(16,0)}, running{true}, programCounter{1}
 {
 }
 
