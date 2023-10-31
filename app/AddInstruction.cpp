@@ -21,5 +21,4 @@ void AddInstruction::execute(ProgramState *state) const
         newVal = state->getRegister(destIdx) + std::stoi(addSrc);
         state->setRegister(destIdx, newVal);
     }
-
 }

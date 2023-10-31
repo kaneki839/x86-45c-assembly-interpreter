@@ -11,6 +11,9 @@ public:
 	SubtractionInstruction(const std::string & dest, const std::string & src);
 	void execute(ProgramState * state) const override;
 
+private:
+	const std::string subDest;
+	const std::string subSrc;
 };
 
 

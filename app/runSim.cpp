@@ -46,11 +46,19 @@ void runSimulator(std::istream &in, ProgramState *ps)
                 Statement *moveCommand = new MoveInstruction(token1, token2);
                 statements.push_back(moveCommand);
             }
-            
-            else if ("ADD" == word) {
+
+            else if ("ADD" == word)
+            {
                 ss >> token1 >> token2;
                 Statement *addCommand = new AddInstruction(token2, token1);
                 statements.push_back(addCommand);
+            }
+
+            else if ("SUB" == word)
+            {
+                ss >> token1 >> token2;
+                Statement *subCommand = new SubtractionInstruction(token2, token1);
+                statements.push_back(subCommand);
             }
         }
     }
@@ -59,7 +67,8 @@ void runSimulator(std::istream &in, ProgramState *ps)
 
     size_t commandNum = 0;
 
-    while (commandNum < statements.size()) {
+    while (commandNum < statements.size())
+    {
         statements[commandNum]->execute(ps);
         commandNum++;
     }
