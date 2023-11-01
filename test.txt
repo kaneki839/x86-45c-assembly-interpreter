@@ -1,7 +1,0 @@
-ADD 1 eax
-IMUL 15 eax
-ADD 10 ebx
-JMP 7
-INC eax
-END
-JMP 5

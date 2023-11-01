@@ -1,9 +1,0 @@
-ADD 1 eax
-IMUL 15 eax
-ADD 10 ebx
-CMP ebx eax
-JL 8
-INC eax
-END
-INC ebx
-END
