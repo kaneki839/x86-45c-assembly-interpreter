@@ -15,14 +15,18 @@ void CmpInstruction::execute(ProgramState *state) const
         int leftIdx = m_lhs[1] - 'a';
         new_lhs = state->getRegister(leftIdx);
     }
+    else
+    {
+        new_lhs = std::stoi(m_lhs);
+    }
+
     if (m_rhs[0] == 'e')
     {
         int rightIdx = m_rhs[1] - 'a';
         new_rhs = state->getRegister(rightIdx);
     }
-    if (m_lhs[0] != 'e' and m_rhs[0] != 'e')
+    else
     {
-        new_lhs = std::stoi(m_lhs);
         new_rhs = std::stoi(m_rhs);
     }
 
